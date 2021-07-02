@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFloorsTable extends Migration
+class CreateStairsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateFloorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('floors', function (Blueprint $table) {
+        Schema::create('stairs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->float('height');
-            $table->string('coordinates');
+            $table->float('type');
+            $table->float('coordinate_x');
+            $table->float('coordinate_y');
+            $table->string('highest_floor_id');
             $table->timestamps();
         });
     }
@@ -29,6 +31,8 @@ class CreateFloorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('floors');
+        Schema::table('stairs', function (Blueprint $table) {
+            //
+        });
     }
 }

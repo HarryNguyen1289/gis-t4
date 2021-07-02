@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Floor;
 use Illuminate\Http\Request;
 
-class FloorController extends Controller
+class StairController extends Controller
 {
     public function index(){
         $floor = Floor::all()->sortByDesc('created_at');
@@ -24,7 +23,7 @@ class FloorController extends Controller
 
     public function edit($id){
         $floor = Floor::find($id);
-        return view('floor.edit', compact(floor));
+        return view('floor.edit');
     }
 
     public function update(Request $request, $id){

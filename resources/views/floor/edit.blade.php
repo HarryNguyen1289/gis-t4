@@ -19,17 +19,21 @@
                 @endif
                 <form action="{{ route('floor.update', $floor->id) }}" method="POST">
                     @csrf
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label>Id *</label>
                         <input class="form-control" value="{{ $floor->id }}" name="id" required/>
+                    </div> -->
+                    <div class="form-group">
+                        <label>Tên tầng</label>
+                        <input type="text" class="form-control" value="{{ $floor->name }}" name="name"/>
                     </div>
                     <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control" value="{{ $floor->name ?? '' }}" name="name"/>
+                        <label>Độ cao</label>
+                        <input type="text" class="form-control" value="{{ $floor->height }}" name="height"/>
                     </div>
                     <div class="form-group">
-                        <label>Description</label>
-                        <input type="text" class="form-control" value="{{ $floor->desc ?? '' }}" name="desc"/>
+                        <label>Danh sách tọa độ</label>
+                        <textarea class="form-control" name="coordinates" id="" cols="30" rows="10">{{ $floor->coordinates }}</textarea>
                     </div>
 
                     <button type="submit" class="btn btn-default">Update</button>

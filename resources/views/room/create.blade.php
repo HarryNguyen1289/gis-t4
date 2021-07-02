@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Point
+                <h1 class="page-header">Room
                     <small>Create</small>
                 </h1>
             </div>
@@ -17,37 +17,32 @@
                         {{session('success')}}
                     </div>
                 @endif
-                <form action="{{ route('point.store') }}" method="POST">
+                <form action="{{ route('room.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label>Id *</label>
-                        <input type="text" class="form-control" name="id" required/>
-                    </div>
-                    <div class="form-group">
-                        <label>Name</label>
+                        <label>Tên phòng</label>
                         <input type="text" class="form-control" name="name"/>
                     </div>
                     <div class="form-group">
-                        <label>Long</label>
-                        <input type="text" class="form-control" name="long"/>
+                        <label>Loại phòng</label>
+                        <input type="text" class="form-control" name="type"/>
                     </div>
                     <div class="form-group">
-                        <label>Lat</label>
-                        <input type="text" class="form-control" name="lat"/>
+                        <label>Tọa độ 1</label>
+                        <input type="text" class="form-control" name="coordinate_x"/>
                     </div>
                     <div class="form-group">
-                        <label>High</label>
-                        <input type="text" class="form-control" name="z"/>
+                        <label>Tọa độ 2</label>
+                        <input type="text" class="form-control" name="coordinate_y"/>
                     </div>
                     <div class="form-group">
-                        <label>Node *</label>
-                        <select name="node_id" class="form-control" required>
-                            @foreach($nodes as $item)
-                                <option value="{{ $item->id }}">{{ $item->id}} - {{ $item->name ?? '' }}</option>
-                            @endforeach
+                        <label>Tầng</label>
+                        <select class="form-control" name="floor_id" id="cars">
+                        @foreach($floors as $item)
+                            <option value="{{$item->id}}">{{$item->name}}</option>
+                        @endforeach
                         </select>
                     </div>
-
                     <button type="submit" class="btn btn-default">Create</button>
                 </form>
             </div>

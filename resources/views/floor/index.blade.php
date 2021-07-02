@@ -20,8 +20,8 @@
                 <thead>
                     <tr align="center">
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Description</th>
+                        <th>Tên tầng</th>
+                        <th>Độ cao</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -31,7 +31,7 @@
                     <tr class="odd gradeX" align="center">
                         <td>{{$item->id}}</td>
                         <td>{{$item->name}}</td>
-                        <td>{{$item->desc}}</td>
+                        <td>{{$item->height}}</td>
                         <td class="center"><a href="{{ route('floor.edit', $item->id) }}"><i class="fa fa-pencil fa-fw"></i> </a></td>
                         <td class="center"> <a href="{{ route('floor.delete', $item->id) }}"><i class="fa fa-trash-o  fa-fw"></i> </a></td>
                     </tr>

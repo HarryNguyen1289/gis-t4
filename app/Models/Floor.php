@@ -9,14 +9,11 @@ class Floor extends Model
     protected $table = 'floors';
     public $incrementing = false;
     protected $fillable = [
-        'id', 'name', 'desc'
+        'id', 'name', 'height', 'coordinates'
     ];
 
-    public function body(){
-        return $this->hasMany(Body::class, 'body_id');
+    public function rooms(){
+        return $this->hasMany(Room::class, 'body_id');
     }
 
-//    public function getIdAttribute(){
-//        dd($this->id);
-//    }
 }

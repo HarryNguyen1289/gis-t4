@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Line
+                <h1 class="page-header">Floor
                     <small>Edit</small>
                 </h1>
             </div>
@@ -17,27 +17,19 @@
                         {{session('success')}}
                     </div>
                 @endif
-                <form action="{{ route('line.update', $line->id) }}" method="POST">
+                <form action="{{ route('floor.update', $floor->id) }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label>Id *</label>
-                        <input class="form-control" value="{{ $line->id }}" name="id" required/>
+                        <input class="form-control" value="{{ $floor->id }}" name="id" required/>
                     </div>
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" value="{{ $line->name ?? '' }}" name="name"/>
+                        <input type="text" class="form-control" value="{{ $floor->name ?? '' }}" name="name"/>
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <input type="text" class="form-control" value="{{ $line->desc ?? '' }}" name="desc"/>
-                    </div>
-                    <div class="form-group">
-                        <label>Node *</label>
-                        <select name="floor_id" class="form-control" required>
-                            @foreach($nodes as $item)
-                                <option value="{{ $item->id }}">{{ $item->id}} - {{ $item->name ?? '' }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" class="form-control" value="{{ $floor->desc ?? '' }}" name="desc"/>
                     </div>
 
                     <button type="submit" class="btn btn-default">Update</button>

@@ -19,17 +19,21 @@
                 @endif
                 <form action="{{ route('floor.store') }}" method="POST">
                     @csrf
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label>Id *</label>
                         <input class="form-control" name="id" required/>
-                    </div>
+                    </div> -->
                     <div class="form-group">
-                        <label>Name</label>
+                        <label>Tên tầng</label>
                         <input type="text" class="form-control" name="name"/>
                     </div>
                     <div class="form-group">
-                        <label>Description</label>
-                        <input type="text" class="form-control" name="desc"/>
+                        <label>Độ cao</label>
+                        <input type="text" class="form-control" name="height"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Danh sách tọa độ</label>
+                        <textarea class="form-control" name="coordinates" id="" cols="30" rows="10"></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-default">Create</button>

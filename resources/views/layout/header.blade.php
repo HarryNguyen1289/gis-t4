@@ -7,8 +7,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand">VẼ NHÀ B</a>
-        <a href="/" class="btn btn-success" style="margin-top: 7px;">Nhà B</a>
+        <a class="navbar-brand">QUẢN LÝ TÒA NHÀ</a>
+        <a href="/" class="btn btn-success" style="margin-top: 7px;">View map</a>
     </div>
     <!-- /.navbar-header -->
 

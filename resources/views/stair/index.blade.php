@@ -6,9 +6,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Face
+                <h1 class="page-header">Floor
                     <small>List</small>
-                    <a href="{{ route('face.create') }}" class="btn btn-success" style="float: right">Add new</a>
+                    <a href="{{ route('floor.create') }}" class="btn btn-success" style="float: right">Add new</a>
                 </h1>
             </div>
             <!-- /.col-lg-12 -->
@@ -22,20 +22,18 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Description</th>
-                        <th>Body</th>
-{{--                        <th>Edit</th>--}}
+                        <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($face as $item)
+                @foreach($floor as $item)
                     <tr class="odd gradeX" align="center">
                         <td>{{$item->id}}</td>
                         <td>{{$item->name}}</td>
                         <td>{{$item->desc}}</td>
-                        <td>{{$item->body->id}} - {{ $item->body->name }}</td>
-{{--                        <td class="center"><a href="{{ route('face.edit', $item->id) }}"><i class="fa fa-pencil fa-fw"></i> </a></td>--}}
-                        <td class="center"> <a href="{{ route('face.delete', $item->id) }}"><i class="fa fa-trash-o  fa-fw"></i> </a></td>
+                        <td class="center"><a href="{{ route('floor.edit', $item->id) }}"><i class="fa fa-pencil fa-fw"></i> </a></td>
+                        <td class="center"> <a href="{{ route('floor.delete', $item->id) }}"><i class="fa fa-trash-o  fa-fw"></i> </a></td>
                     </tr>
                 @endforeach
                 </tbody>
