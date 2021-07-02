@@ -13,12 +13,99 @@
             padding: 0;
             margin: 0;
             height: 100%;
-            width: 100%;
+            width: 100%;   
+            font-family: 'Helvetica';
+            font-size:14px;  
+            position: relative;      
         }
-        
+        .address-container{
+            width: 25rem;
+            min-height: 40rem;
+            height: auto;
+            background-color: white;
+            position: absolute;
+            left: 5%;
+            top: 10%;
+            border-radius: 5px;
+        }
+        .form{
+            height: 9rem;
+            background-color: #1A73E8;
+            position: relative
+        }
+        .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #ced4da !important;
+            opacity: 1; /* Firefox */
+        }
+        .search{
+            position: absolute;
+            bottom: -45%;
+            left: 35%;
+        }
+        .content{
+            height: auto;
+            margin-top: 5rem; 
+        }
+        #phong1,#phong2{
+            background-color: transparent;
+            color: #ced4da;
+            border: none;
+            border-bottom: 1px solid #ced4da;
+            border-radius: 0px;
+        }
+
+        .StepProgress {
+            position: relative;
+            padding-left: 45px;
+            list-style: none;
+        }
+        .StepProgress::before {
+            display: inline-block;
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 15px;
+            width: 10px;
+            height: 95%;
+            border-left: 2px solid #CCC;
+        }
+        .StepProgress-item {
+            position: relative;
+            counter-increment: list;
+        }
+        .StepProgress-item:not(:last-child) {
+            padding-bottom: 20px;
+        }
+        .StepProgress-item::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            left: -13%;
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid #CCC;
+            border-radius: 50%;
+            background-color: #FFF;
+        }
+        .StepProgress-item.head::before {
+            border-left: 2px solid #1A73E8;
+        }
+        .StepProgress-item.head::after {
+            content: "";
+            border: 2px solid #1A73E8;
+            background-color: #1A73E8;
+        }
+        .StepProgress strong {
+            display: block;
+        }
     </style>
 
     <link rel="stylesheet" href="https://js.arcgis.com/4.16/esri/themes/light/main.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://js.arcgis.com/4.16/"></script>
 
     <script>
@@ -28,7 +115,9 @@
             "esri/layers/GeoJSONLayer",
             "esri/layers/SceneLayer"
         ], function(Map, SceneView, GeoJSONLayer, SceneLayer) {
-            <?php $flag1 = [
+            // Khối A
+            <?php 
+            $flag1 = [
                 [
                     [1,2,3],
                     [1,2,3]
@@ -122,40 +211,42 @@
                 @endforeach
             @endforeach
 
-            <?php $flag2 = [
-            [
-                [1,2,3],
-                [1,2,3]
-            ],
-            [
-                [1,2,3],
-                [1,2,3]
-            ],
-            [
-                [1,2,3],
-                [1,2,3]
-            ],
-            [
-                [1,2,3],
-                [1,2,3]
-            ],
-            [
-                [1,2,3],
-                [1,2,3]
-            ],
-            [
-                [1,2,3],
-                [1,2,3]
-            ],
-            [
-                [1,2,3],
-                [1,2,3]
-            ],
-            [
-                [1,2,3],
-                [1,2,3]
-            ],
-        ]
+            // Khối B
+            <?php 
+            $flag2 = [
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ],
+            ]
             ?>
 
             @foreach( $flag2 as $key => $item)
@@ -213,29 +304,31 @@
                 @endforeach
             @endforeach
 
-            <?php $flag3 = [
-            [
-                [1,2,3]
-            ],
-            [
-                [1,2,3]
-            ],
-            [
-                [1,2,3]
-            ],
-            [
-                [1,2,3]
-            ],
-            [
-                [1,2,3]
-            ],
-            [
-                [1,2,3]
-            ],
-            [
-                [1,2,3]
-            ],
-        ]
+            // Khối C
+            <?php 
+            $flag3 = [
+                [
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3]
+                ],
+            ]
             ?>
 
             @foreach( $flag3 as $key => $item)
@@ -293,246 +386,250 @@
                 @endforeach
             @endforeach
 
-//d
-            <?php $flag4 = [
-            [
-                [1,2,3],
-                [1,2,3]
-            ],
-            [
-                [1,2,3],
-                [1,2,3]
-            ],
-            [
-                [1,2,3],
-                [1,2,3]
-            ],
-            [
-                [1,2,3],
-                [1,2,3]
-            ],
-            [
-                [1,2,3],
-                [1,2,3]
-            ],
-            [
-                [1,2,3],
-                [1,2,3]
+            // Khối D
+            <?php 
+            $flag4 = [
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ]
             ]
-        ]
             ?>
 
             @foreach( $flag4 as $key => $item)
-            @foreach($item as $key1 => $item1)
-            const geojson{{$key+1}}df{{$key1+1}}1  = new GeoJSONLayer({
-                url: "geojson/body/d/{{$key + 1}}df{{$key1 +1}}1.geojson"
-            })
-            geojson{{$key+1}}df{{$key1+1}}1.renderer = {
-                type: "simple",
-                symbol: {
-                    type: "polygon-3d",
-                    symbolLayers: [{
-                        type: "extrude",
-                        size: 1, //chiều cao
-                        material: {
-                            color: "#019ee2" // xanh dam
+                @foreach($item as $key1 => $item1)
+                    const geojson{{$key+1}}df{{$key1+1}}1  = new GeoJSONLayer({
+                        url: "geojson/body/d/{{$key + 1}}df{{$key1 +1}}1.geojson"
+                    })
+                    geojson{{$key+1}}df{{$key1+1}}1.renderer = {
+                        type: "simple",
+                        symbol: {
+                            type: "polygon-3d",
+                            symbolLayers: [{
+                                type: "extrude",
+                                size: 1, //chiều cao
+                                material: {
+                                    color: "#019ee2" // xanh dam
+                                }
+                            }]
                         }
-                    }]
-                }
-            };
+                    };
 
-            const geojson{{$key+1}}df{{$key1+1}}2  = new GeoJSONLayer({
-                url: "geojson/body/d/{{$key + 1}}df{{$key1 +1}}2.geojson"
-            })
-            geojson{{$key+1}}df{{$key1+1}}2.renderer = {
-                type: "simple",
-                symbol: {
-                    type: "polygon-3d",
-                    symbolLayers: [{
-                        type: "extrude",
-                        size: 2, //chiều cao
-                        material: {
-                            color: "#87dbfa" // xanh dam
+                    const geojson{{$key+1}}df{{$key1+1}}2  = new GeoJSONLayer({
+                        url: "geojson/body/d/{{$key + 1}}df{{$key1 +1}}2.geojson"
+                    })
+                    geojson{{$key+1}}df{{$key1+1}}2.renderer = {
+                        type: "simple",
+                        symbol: {
+                            type: "polygon-3d",
+                            symbolLayers: [{
+                                type: "extrude",
+                                size: 2, //chiều cao
+                                material: {
+                                    color: "#87dbfa" // xanh dam
+                                }
+                            }]
                         }
-                    }]
-                }
-            };
+                    };
 
-            const geojson{{$key+1}}df{{$key1+1}}3  = new GeoJSONLayer({
-                url: "geojson/body/d/{{$key + 1}}df{{$key1 +1}}3.geojson"
-            })
-            geojson{{$key+1}}df{{$key1+1}}3.renderer = {
-                type: "simple",
-                symbol: {
-                    type: "polygon-3d",
-                    symbolLayers: [{
-                        type: "extrude",
-                        size: 2, //chiều cao
-                        material: {
-                            color: "#ffffff" // xanh dam
+                    const geojson{{$key+1}}df{{$key1+1}}3  = new GeoJSONLayer({
+                        url: "geojson/body/d/{{$key + 1}}df{{$key1 +1}}3.geojson"
+                    })
+                    geojson{{$key+1}}df{{$key1+1}}3.renderer = {
+                        type: "simple",
+                        symbol: {
+                            type: "polygon-3d",
+                            symbolLayers: [{
+                                type: "extrude",
+                                size: 2, //chiều cao
+                                material: {
+                                    color: "#ffffff" // xanh dam
+                                }
+                            }]
                         }
-                    }]
-                }
-            };
+                    };
+                @endforeach
             @endforeach
-            @endforeach
 
-            //e
-            <?php $flag5 = [
-            [
-                [1,2,3],
-                [1,2,3]
-            ],
-            [
-                [1,2,3],
-                [1,2,3]
-            ],
-            [
-                [1,2,3],
-                [1,2,3]
-            ],
-            [
-                [1,2,3],
-                [1,2,3]
-            ],
-            [
-                [1,2,3],
-                [1,2,3]
+            // Khối E
+            <?php 
+            $flag5 = [
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ]
             ]
-        ]
             ?>
 
             @foreach( $flag5 as $key => $item)
-            @foreach($item as $key1 => $item1)
-            const geojson{{$key+1}}ef{{$key1+1}}1  = new GeoJSONLayer({
-                url: "geojson/body/e/{{$key + 1}}ef{{$key1 +1}}1.geojson"
-            })
-            geojson{{$key+1}}ef{{$key1+1}}1.renderer = {
-                type: "simple",
-                symbol: {
-                    type: "polygon-3d",
-                    symbolLayers: [{
-                        type: "extrude",
-                        size: 1, //chiều cao
-                        material: {
-                            color: "#019ee2" // xanh dam
+                @foreach($item as $key1 => $item1)
+                    const geojson{{$key+1}}ef{{$key1+1}}1  = new GeoJSONLayer({
+                        url: "geojson/body/e/{{$key + 1}}ef{{$key1 +1}}1.geojson"
+                    })
+                    geojson{{$key+1}}ef{{$key1+1}}1.renderer = {
+                        type: "simple",
+                        symbol: {
+                            type: "polygon-3d",
+                            symbolLayers: [{
+                                type: "extrude",
+                                size: 1, //chiều cao
+                                material: {
+                                    color: "#019ee2" // xanh dam
+                                }
+                            }]
                         }
-                    }]
-                }
-            };
+                    };
 
-            const geojson{{$key+1}}ef{{$key1+1}}2  = new GeoJSONLayer({
-                url: "geojson/body/e/{{$key + 1}}ef{{$key1 +1}}2.geojson"
-            })
-            geojson{{$key+1}}ef{{$key1+1}}2.renderer = {
-                type: "simple",
-                symbol: {
-                    type: "polygon-3d",
-                    symbolLayers: [{
-                        type: "extrude",
-                        size: 2, //chiều cao
-                        material: {
-                            color: "#87dbfa" // xanh dam
+                    const geojson{{$key+1}}ef{{$key1+1}}2  = new GeoJSONLayer({
+                        url: "geojson/body/e/{{$key + 1}}ef{{$key1 +1}}2.geojson"
+                    })
+                    geojson{{$key+1}}ef{{$key1+1}}2.renderer = {
+                        type: "simple",
+                        symbol: {
+                            type: "polygon-3d",
+                            symbolLayers: [{
+                                type: "extrude",
+                                size: 2, //chiều cao
+                                material: {
+                                    color: "#87dbfa" // xanh dam
+                                }
+                            }]
                         }
-                    }]
-                }
-            };
+                    };
 
-            const geojson{{$key+1}}ef{{$key1+1}}3  = new GeoJSONLayer({
-                url: "geojson/body/e/{{$key + 1}}ef{{$key1 +1}}3.geojson"
-            })
-            geojson{{$key+1}}ef{{$key1+1}}3.renderer = {
-                type: "simple",
-                symbol: {
-                    type: "polygon-3d",
-                    symbolLayers: [{
-                        type: "extrude",
-                        size: 2, //chiều cao
-                        material: {
-                            color: "#ffffff" // xanh dam
+                    const geojson{{$key+1}}ef{{$key1+1}}3  = new GeoJSONLayer({
+                        url: "geojson/body/e/{{$key + 1}}ef{{$key1 +1}}3.geojson"
+                    })
+                    geojson{{$key+1}}ef{{$key1+1}}3.renderer = {
+                        type: "simple",
+                        symbol: {
+                            type: "polygon-3d",
+                            symbolLayers: [{
+                                type: "extrude",
+                                size: 2, //chiều cao
+                                material: {
+                                    color: "#ffffff" // xanh dam
+                                }
+                            }]
                         }
-                    }]
-                }
-            };
+                    };
+                @endforeach
             @endforeach
-            @endforeach
-//f
-            <?php $flag6 = [
-            [
-                [1,2,3],
-                [1,2,3]
-            ],
-            [
-                [1,2,3],
-                [1,2,3]
-            ],
-            [
-                [1,2,3],
-                [1,2,3]
-            ],
-            [
-                [1,2,3],
-                [1,2,3]
+
+            // Khối F
+            <?php 
+            $flag6 = [
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ],
+                [
+                    [1,2,3],
+                    [1,2,3]
+                ]
             ]
-        ]
             ?>
 
             @foreach( $flag6 as $key => $item)
-            @foreach($item as $key1 => $item1)
-            const geojson{{$key+1}}ff{{$key1+1}}1  = new GeoJSONLayer({
-                url: "geojson/body/f/{{$key + 1}}ff{{$key1 +1}}1.geojson"
-            })
-            geojson{{$key+1}}ff{{$key1+1}}1.renderer = {
-                type: "simple",
-                symbol: {
-                    type: "polygon-3d",
-                    symbolLayers: [{
-                        type: "extrude",
-                        size: 1, //chiều cao
-                        material: {
-                            color: "#019ee2" // xanh dam
+                @foreach($item as $key1 => $item1)
+                    const geojson{{$key+1}}ff{{$key1+1}}1  = new GeoJSONLayer({
+                        url: "geojson/body/f/{{$key + 1}}ff{{$key1 +1}}1.geojson"
+                    })
+                    geojson{{$key+1}}ff{{$key1+1}}1.renderer = {
+                        type: "simple",
+                        symbol: {
+                            type: "polygon-3d",
+                            symbolLayers: [{
+                                type: "extrude",
+                                size: 1, //chiều cao
+                                material: {
+                                    color: "#019ee2" // xanh dam
+                                }
+                            }]
                         }
-                    }]
-                }
-            };
+                    };
 
-            const geojson{{$key+1}}ff{{$key1+1}}2  = new GeoJSONLayer({
-                url: "geojson/body/f/{{$key + 1}}ff{{$key1 +1}}2.geojson"
-            })
-            geojson{{$key+1}}ff{{$key1+1}}2.renderer = {
-                type: "simple",
-                symbol: {
-                    type: "polygon-3d",
-                    symbolLayers: [{
-                        type: "extrude",
-                        size: 2, //chiều cao
-                        material: {
-                            color: "#87dbfa" // xanh dam
+                    const geojson{{$key+1}}ff{{$key1+1}}2  = new GeoJSONLayer({
+                        url: "geojson/body/f/{{$key + 1}}ff{{$key1 +1}}2.geojson"
+                    })
+                    geojson{{$key+1}}ff{{$key1+1}}2.renderer = {
+                        type: "simple",
+                        symbol: {
+                            type: "polygon-3d",
+                            symbolLayers: [{
+                                type: "extrude",
+                                size: 2, //chiều cao
+                                material: {
+                                    color: "#87dbfa" // xanh dam
+                                }
+                            }]
                         }
-                    }]
-                }
-            };
+                    };
 
-            const geojson{{$key+1}}ff{{$key1+1}}3  = new GeoJSONLayer({
-                url: "geojson/body/f/{{$key + 1}}ff{{$key1 +1}}3.geojson"
-            })
-            geojson{{$key+1}}ff{{$key1+1}}3.renderer = {
-                type: "simple",
-                symbol: {
-                    type: "polygon-3d",
-                    symbolLayers: [{
-                        type: "extrude",
-                        size: 2, //chiều cao
-                        material: {
-                            color: "#ffffff" // xanh dam
+                    const geojson{{$key+1}}ff{{$key1+1}}3  = new GeoJSONLayer({
+                        url: "geojson/body/f/{{$key + 1}}ff{{$key1 +1}}3.geojson"
+                    })
+                    geojson{{$key+1}}ff{{$key1+1}}3.renderer = {
+                        type: "simple",
+                        symbol: {
+                            type: "polygon-3d",
+                            symbolLayers: [{
+                                type: "extrude",
+                                size: 2, //chiều cao
+                                material: {
+                                    color: "#ffffff" // xanh dam
+                                }
+                            }]
                         }
-                    }]
-                }
-            };
+                    };
+                @endforeach
             @endforeach
-            @endforeach
 
-	//TwoSide
+	        //TwoSide
             const geojsonWallLeft  = new GeoJSONLayer({
                 url: "geojson/TwoSide/WallLeft.geojson"
             })
@@ -550,7 +647,7 @@
                 }
             };
 
-	    const geojsonWallRight  = new GeoJSONLayer({
+            const geojsonWallRight  = new GeoJSONLayer({
                 url: "geojson/TwoSide/WallRight.geojson"
             })
             geojsonWallRight.renderer = {
@@ -567,7 +664,7 @@
                 }
             };
 
-	    const geojsonWallWindowSize1  = new GeoJSONLayer({
+	        const geojsonWallWindowSize1  = new GeoJSONLayer({
                 url: "geojson/TwoSide/WallWindowSize1.geojson"
             })
             geojsonWallWindowSize1.renderer = {
@@ -635,7 +732,7 @@
                 }
             };
 
-        //front
+            // Front
             <?php $arrf = [6,34.2,30.2,26.2,22.2,18.2,14.2 ] ?>
             @for($i = 0; $i < 7; $i++)
                 const geojsonf{{$i}}  = new GeoJSONLayer({
@@ -660,122 +757,121 @@
                     }
                 };
             @endfor
-        //wall
-        <?php $arrf = [0,40,36,32,28,24,20] ?>
-            @for($i = 1; $i < 7; $i++)
-                const geojsonw{{$i}}  = new GeoJSONLayer({
-                    url: "geojson/Wall/insideWall/f{{$i}}.geojson"
-                })
+            //wall
+            <?php $arrf = [0,40,36,32,28,24,20] ?>
+                @for($i = 1; $i < 7; $i++)
+                    const geojsonw{{$i}}  = new GeoJSONLayer({
+                        url: "geojson/Wall/insideWall/f{{$i}}.geojson"
+                    })
 
-                geojsonw{{$i}}.renderer = {
-                    type: "simple",
-                    symbol: {
-                        type: "polygon-3d",
-                        symbolLayers: [{
-                            type: "extrude",
-                            size: {{ $arrf[$i] }}, //chiều cao
-                            material: {
-                                    color: "#73f1ff"
-                            }
-                        }]
-                    }
-                };
-            @endfor
-        //balcony
-        const geojsonbalcony  = new GeoJSONLayer({
-                    url: "geojson/balcony/balconyInside.geojson"
-                })
+                    geojsonw{{$i}}.renderer = {
+                        type: "simple",
+                        symbol: {
+                            type: "polygon-3d",
+                            symbolLayers: [{
+                                type: "extrude",
+                                size: {{ $arrf[$i] }}, //chiều cao
+                                material: {
+                                        color: "#73f1ff"
+                                }
+                            }]
+                        }
+                    };
+                @endfor
+            //balcony
+            const geojsonbalcony  = new GeoJSONLayer({
+                        url: "geojson/balcony/balconyInside.geojson"
+                    })
 
-                geojsonbalcony.renderer = {
-                    type: "simple",
-                    symbol: {
-                        type: "line-3d",
-                        symbolLayers: [{
-                            type: "path",
-                            width : 0.1,
-                            material: {
-                                    color: "#2e3536"
-                            }
-                        }]
-                    }
-                };
-        //windowOutside
-        const geojsonwindowOutside  = new GeoJSONLayer({
-                    url: "geojson/window/windowA.geojson"
-                })
+                    geojsonbalcony.renderer = {
+                        type: "simple",
+                        symbol: {
+                            type: "line-3d",
+                            symbolLayers: [{
+                                type: "path",
+                                width : 0.1,
+                                material: {
+                                        color: "#2e3536"
+                                }
+                            }]
+                        }
+                    };
+            //windowOutside
+            const geojsonwindowOutside  = new GeoJSONLayer({
+                        url: "geojson/window/windowA.geojson"
+                    })
 
-                geojsonwindowOutside.renderer = {
-                    type: "simple",
-                    symbol: {
-                        type: "line-3d",
-                        symbolLayers: [{
-                            type: "path",
-                            width : 0.1,
-                            material: {
-                                    color: "#000000"
-                            }
-                        }]
-                    }
-                };
-        //windowInsideFrame
-        const geojsonwindowInsideFrame = new GeoJSONLayer({
-                    url: "geojson/window/windowInside/frame1.geojson"
-                })
+                    geojsonwindowOutside.renderer = {
+                        type: "simple",
+                        symbol: {
+                            type: "line-3d",
+                            symbolLayers: [{
+                                type: "path",
+                                width : 0.1,
+                                material: {
+                                        color: "#000000"
+                                }
+                            }]
+                        }
+                    };
+            //windowInsideFrame
+            const geojsonwindowInsideFrame = new GeoJSONLayer({
+                        url: "geojson/window/windowInside/frame1.geojson"
+                    })
 
-                geojsonwindowInsideFrame.renderer = {
-                    type: "simple",
-                    symbol: {
-                        type: "line-3d",
-                        symbolLayers: [{
-                            type: "path",
-                            width : 0.1,
-                            material: {
-                                    color: "#000000"
-                            }
-                        }]
-                    }
-                };
-        
-        //balconyroof
-        const geojsonbalconyroof  = new GeoJSONLayer({
-                    url: "geojson/balcony/balconyroof.geojson"
-                })
+                    geojsonwindowInsideFrame.renderer = {
+                        type: "simple",
+                        symbol: {
+                            type: "line-3d",
+                            symbolLayers: [{
+                                type: "path",
+                                width : 0.1,
+                                material: {
+                                        color: "#000000"
+                                }
+                            }]
+                        }
+                    };
+            
+            //balconyroof
+            const geojsonbalconyroof  = new GeoJSONLayer({
+                        url: "geojson/balcony/balconyroof.geojson"
+                    })
 
-                geojsonbalconyroof.renderer = {
-                    type: "simple",
-                    symbol: {
-                        type: "line-3d",
-                        symbolLayers: [{
-                            type: "path",
-                            width : 0.1,
-                            material: {
-                                    color: "#019ee2"
-                            }
-                        }]
-                    }
-                };
+                    geojsonbalconyroof.renderer = {
+                        type: "simple",
+                        symbol: {
+                            type: "line-3d",
+                            symbolLayers: [{
+                                type: "path",
+                                width : 0.1,
+                                material: {
+                                        color: "#019ee2"
+                                }
+                            }]
+                        }
+                    };
 
-        //pillarroof
+            //pillarroof
+            const geojsonpillarroof  = new GeoJSONLayer({
+                        url: "geojson/balcony/pillarroof.geojson"
+                    })
 
-        const geojsonpillarroof  = new GeoJSONLayer({
-                    url: "geojson/balcony/pillarroof.geojson"
-                })
+                    geojsonpillarroof.renderer = {
+                        type: "simple",
+                        symbol: {
+                            type: "line-3d",
+                            symbolLayers: [{
+                                type: "path",
+                                width : 0.1,
+                                material: {
+                                        color: "#019ee2"
+                                }
+                            }]
+                        }
+                    };
 
-                geojsonpillarroof.renderer = {
-                    type: "simple",
-                    symbol: {
-                        type: "line-3d",
-                        symbolLayers: [{
-                            type: "path",
-                            width : 0.1,
-                            material: {
-                                    color: "#019ee2"
-                            }
-                        }]
-                    }
-                };
-
-        // flootr
+            // floor
             @for($i = 0; $i < 8; $i++)
                 const geojsonfl{{$i}}  = new GeoJSONLayer({
                     url: "geojson/floor/f{{$i}}.geojson"
@@ -844,7 +940,6 @@
             const dat  = new GeoJSONLayer({
                 url: "geojson/dat.geojson"
             })
-
             dat.renderer = {
                 type: "simple",
                 symbol: {
@@ -999,7 +1094,7 @@
                 geojsonwindowOutside,
                 geojsonwindowInsideFrame,            
                
-		geojsonWallLeft, geojsonWallRight, geojsonWallWindowSize1, geojsonWallWindowSize2, geojsonWindowRight, geojsonWindowLeft
+		    geojsonWallLeft, geojsonWallRight, geojsonWallWindowSize1, geojsonWallWindowSize2, geojsonWindowRight, geojsonWindowLeft
                 ] //Những layer xuất hiện
             });
 
@@ -1007,7 +1102,7 @@
                 container: "viewDiv",
                 map: map,
                 camera: {
-                    position: [106.803657, 10.866564, 300],
+                    position: [106.803657, 10.868464, 80],
                     heading: 0,
                     tilt: 75
                 }
@@ -1018,7 +1113,36 @@
 </head>
 
 <body>
-<div id="viewDiv"></div>
+<div id="viewDiv">
+    <div class="address-container">
+        <div class="form">
+            <form class="p-3" action="" method="GET">
+                @csrf
+                <div class="input-group mb-3">
+                    <input class="form-control" id="phong1" type="text" placeholder="Chọn phòng bắt đầu ... "/>
+                </div>
+
+                <div class="input-group">
+                    <input class="form-control" id="phong2" type="text" placeholder="Chọn phòng cần đến ... "/>
+                </div>       
+                <button type="submit" class="btn btn-primary btn-md search"> Tìm Đường </button>
+            </form>
+        </div>
+        <div class="content p-3">
+            <ul class="StepProgress">
+                <li class="StepProgress-item head"><strong>Post a contest</strong></li>
+                <li class="StepProgress-item"><strong>Award an entry</strong></li>
+                <li class="StepProgress-item"><strong>Post a contest</strong></li>
+                <li class="StepProgress-item"><strong>Handover</strong></li>
+                <li class="StepProgress-item"><strong>Provide feedback</strong></li>
+                <li class="StepProgress-item"><strong>Provide feedback</strong></li>
+                <li class="StepProgress-item"><strong>Provide feedback</strong></li>
+
+            </ul>
+            <p class="h4 text-center mt-5">HỆ HỖ TRỢ DẪN ĐƯỜNG ĐI TRONG TÒA NHÀ B - UIT</p>
+        </div>
+    </div>
+</div>
 </body>
 
 </html>
