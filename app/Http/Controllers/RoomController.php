@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Room;
-use App\Models\Floor;
+use App\Models\Node;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -14,29 +14,30 @@ class RoomController extends Controller
     }
 
     public function create(){
-        $floors = Floor::all()->sortByDesc('created_at');
-        return view('room.create', compact('floors'));
+        $nodes = Node::all()->sortBy('id');
+        return view('room.create', compact('nodes'));
     }
 
     public function store(Request $request){
         Room::create($request->all());
-        return redirect()->route('room.create')->with('success', 'Thêm Room thành công!');
+        return redirect()->route('room.create')->with('success', 'Thêm phòng thành công!');
     }
 
     public function edit($id){
         $room = Room::find($id);
-        return view('room.edit', compact('room'));
+        $nodes = Node::all()->sortBy('id');
+        return view('room.edit', compact('room', 'nodes'));
     }
 
     public function update(Request $request, $id){
-        $floor = Room::find($id);
-        $floor->update($request->all());
+        $room = Room::find($id);
+        $room->update($request->all());
 
-        return redirect()->route('room.create')->with('success', 'Sửa Room thành công!');
+        return redirect()->route('room.index')->with('success', 'Sửa phòng thành công!');
     }
 
     public function delete($id){
         Room::find($id)->delete();
-        return redirect()->route('room.index')->with('success', 'Xóa Room thành công');
+        return redirect()->route('room.index')->with('success', 'Xóa phòng thành công');
     }
 }

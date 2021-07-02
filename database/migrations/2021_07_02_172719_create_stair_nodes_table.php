@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStairsTable extends Migration
+class CreateStairNodesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateStairsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stairs', function (Blueprint $table) {
+        Schema::create('stair_nodes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('type');
+            $table->string('stair_id');
+            $table->string('node_id');
             $table->timestamps();
         });
     }
@@ -28,7 +28,7 @@ class CreateStairsTable extends Migration
      */
     public function down()
     {
-        Schema::table('stairs', function (Blueprint $table) {
+        Schema::table('stair_nodes', function (Blueprint $table) {
             //
         });
     }

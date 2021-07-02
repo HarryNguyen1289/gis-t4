@@ -19,10 +19,6 @@
                 @endif
                 <form action="{{ route('floor.update', $floor->id) }}" method="POST">
                     @csrf
-                    <!-- <div class="form-group">
-                        <label>Id *</label>
-                        <input class="form-control" value="{{ $floor->id }}" name="id" required/>
-                    </div> -->
                     <div class="form-group">
                         <label>Tên tầng</label>
                         <input type="text" class="form-control" value="{{ $floor->name }}" name="name"/>

@@ -25,21 +25,17 @@
                     </div>
                     <div class="form-group">
                         <label>Loại phòng</label>
-                        <input type="text" class="form-control" name="type"/>
+                        <select class="form-control" name="type">
+                            <option value="Phòng học">Phòng học</option>
+                            <option value="Toilet">Toilet</option>
+                            <option value="Phòng cơ sở vật chất">Phòng cơ sở vật chất</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label>Tọa độ 1</label>
-                        <input type="text" class="form-control" name="coordinate_x"/>
-                    </div>
-                    <div class="form-group">
-                        <label>Tọa độ 2</label>
-                        <input type="text" class="form-control" name="coordinate_y"/>
-                    </div>
-                    <div class="form-group">
-                        <label>Tầng</label>
-                        <select class="form-control" name="floor_id" id="cars">
-                        @foreach($floors as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
+                        <label>Node</label>
+                        <select class="form-control" name="node_id" id="cars">
+                        @foreach($nodes as $item)
+                            <option value="{{$item->id}}">Node Id: {{$item->id}} || Floor Id: {{$item->floor_id}} || ({{$item->coordinate_x}}, {{$item->coordinate_y}})</option>
                         @endforeach
                         </select>
                     </div>

@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Floor extends Model
+class Line extends Model
 {
-    protected $table = 'floors';
+    protected $table = 'lines';
     public $incrementing = false;
     protected $fillable = [
-        'id', 'name', 'height', 'coordinates'
+        'id', 'first_node', 'second_node', 'distance'
     ];
-
 }

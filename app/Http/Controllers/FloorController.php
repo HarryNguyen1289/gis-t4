@@ -19,23 +19,23 @@ class FloorController extends Controller
 
     public function store(Request $request){
         Floor::create($request->all());
-        return redirect()->route('floor.create')->with('success', 'Thêm Floor thành công!');
+        return redirect()->route('floor.create')->with('success', 'Thêm tầng thành công!');
     }
 
     public function edit($id){
         $floor = Floor::find($id);
-        return view('floor.edit', compact(floor));
+        return view('floor.edit', compact('floor'));
     }
 
     public function update(Request $request, $id){
         $floor = Floor::find($id);
         $floor->update($request->all());
 
-        return redirect()->route('floor.create')->with('success', 'Sửa Floor thành công!');
+        return redirect()->route('floor.index')->with('success', 'Sửa tầng thành công!');
     }
 
     public function delete($id){
         Floor::find($id)->delete();
-        return redirect()->route('floor.index')->with('success', 'Xóa Floor thành công');
+        return redirect()->route('floor.index')->with('success', 'Xóa tầng thành công');
     }
 }

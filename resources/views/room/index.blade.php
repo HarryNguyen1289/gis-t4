@@ -22,8 +22,7 @@
                         <th>ID</th>
                         <th>Tên phòng</th>
                         <th>Loại phòng</th>
-                        <th>Tọa độ</th>
-                        <th>Tầng</th>
+                        <th>Node Id</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -34,10 +33,9 @@
                         <td>{{$item->id}}</td>
                         <td>{{$item->name}}</td>
                         <td>{{$item->type}}</td>
-                        <td>( {{$item->coordinate_x}},{{$item->coordinate_y}} )</td>
-                        <td>{{$item->floor_id}}</td>
-                        <td class="center"><a href="{{ route('floor.edit', $item->id) }}"><i class="fa fa-pencil fa-fw"></i> </a></td>
-                        <td class="center"> <a href="{{ route('floor.delete', $item->id) }}"><i class="fa fa-trash-o  fa-fw"></i> </a></td>
+                        <td>{{$item->node_id}}</td>
+                        <td class="center"><a href="{{ route('room.edit', $item->id) }}"><i class="fa fa-pencil fa-fw"></i> </a></td>
+                        <td class="center"> <a href="{{ route('room.delete', $item->id) }}"><i class="fa fa-trash-o  fa-fw"></i> </a></td>
                     </tr>
                 @endforeach
                 </tbody>

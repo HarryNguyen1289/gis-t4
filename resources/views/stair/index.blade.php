@@ -6,9 +6,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Floor
+                <h1 class="page-header">Cầu thang & Thang máy
                     <small>List</small>
-                    <a href="{{ route('floor.create') }}" class="btn btn-success" style="float: right">Add new</a>
+                    <a href="{{ route('stair.create') }}" class="btn btn-success" style="float: right">Add new</a>
                 </h1>
             </div>
             <!-- /.col-lg-12 -->
@@ -20,20 +20,22 @@
                 <thead>
                     <tr align="center">
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Description</th>
+                        <th>Tên</th>
+                        <th>Loại</th>
+                        <th>Tầng cao nhất</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($floor as $item)
+                @foreach($stairs as $item)
                     <tr class="odd gradeX" align="center">
                         <td>{{$item->id}}</td>
                         <td>{{$item->name}}</td>
-                        <td>{{$item->desc}}</td>
-                        <td class="center"><a href="{{ route('floor.edit', $item->id) }}"><i class="fa fa-pencil fa-fw"></i> </a></td>
-                        <td class="center"> <a href="{{ route('floor.delete', $item->id) }}"><i class="fa fa-trash-o  fa-fw"></i> </a></td>
+                        <td>{{$item->type}}</td>
+                        <td>{{$item->highest_floor_id}}</td>
+                        <td class="center"><a href="{{ route('stair.edit', $item->id) }}"><i class="fa fa-pencil fa-fw"></i> </a></td>
+                        <td class="center"> <a href="{{ route('stair.delete', $item->id) }}"><i class="fa fa-trash-o  fa-fw"></i> </a></td>
                     </tr>
                 @endforeach
                 </tbody>

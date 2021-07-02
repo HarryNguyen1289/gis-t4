@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Floor
+                <h1 class="page-header">Cầu thang & Thang máy
                     <small>Edit</small>
                 </h1>
             </div>
@@ -17,19 +17,35 @@
                         {{session('success')}}
                     </div>
                 @endif
-                <form action="{{ route('floor.update', $floor->id) }}" method="POST">
+                <form action="{{ route('stair.update', $stair->id) }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label>Id *</label>
-                        <input class="form-control" value="{{ $floor->id }}" name="id" required/>
+                        <label>Tên</label>
+                        <input type="text" class="form-control" value="{{ $stair->name }}" name="name"/>
                     </div>
                     <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control" value="{{ $floor->name ?? '' }}" name="name"/>
+                        <label>Loại</label>
+                        <select class="form-control" name="type" value="{{ $stair->type }}">
+                            <option value="Cầu thang" {{ ($stair->type == 'Cầu thang') ? 'selected=selected' : '' }}>Cầu thang</option>
+                            <option value="Thang máy" {{ ($stair->type == 'Thang máy') ? 'selected=selected' : '' }}>Thang máy</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label>Description</label>
-                        <input type="text" class="form-control" value="{{ $floor->desc ?? '' }}" name="desc"/>
+                        <label>Tọa độ chân cầu thang</label>
+                        <select class="form-control" name="node_id">
+                        @foreach($nodes as $item)
+                            <option value="{{$item->id}}">Node Id: {{$item->id}} || Floor Id: {{$item->floor_id}} || ({{$item->coordinate_x}}, {{$item->coordinate_y}})</option>
+                        @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tầng cao nhất có thể tới</label>
+                        <select class="form-control" value="{{ $stair->highest_floor_id }}" name="highest_floor_id">
+                        @foreach($floors as $item)
+                            <option value="{{$item->id}}" {{ ($stair->highest_floor_id == $item->id) ? 'selected=selected' : '' }}>
+                            {{$item->name}}</option>
+                        @endforeach
+                        </select>
                     </div>
 
                     <button type="submit" class="btn btn-default">Update</button>

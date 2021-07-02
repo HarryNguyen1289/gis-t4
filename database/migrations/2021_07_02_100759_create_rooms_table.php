@@ -17,9 +17,7 @@ class CreateRoomsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('type');
-            $table->float('coordinate_x');
-            $table->float('coordinate_y');
-            $table->string('floor_id');
+            $table->string('node_id');
             $table->timestamps();
         });
     }

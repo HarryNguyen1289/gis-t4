@@ -3,38 +3,112 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Floor;
+use App\Models\Stair;
+use App\Models\Node;
+use App\Models\Line;
+use App\Models\StairNode;
 
 class StairController extends Controller
 {
     public function index(){
-        $floor = Floor::all()->sortByDesc('created_at');
-        return view('floor.index', compact('floor'));
+        $stairs = Stair::all()->sortByDesc('created_at');
+        return view('stair.index', compact('stairs'));
     }
 
     public function create(){
-
-        return view('floor.create');
+        $nodes = Node::all()->sortBy('id')->take(36);
+        $floors = Floor::all()->sortBy('name');
+        return view('stair.create', compact('nodes', 'floors'));
     }
 
     public function store(Request $request){
-        Floor::create($request->all());
-        return redirect()->route('floor.create')->with('success', 'Thêm Floor thành công!');
+        $start_node_id = $request->input('node_id');
+        $highest_floor_id = $request->input('highest_floor_id');
+        $new_stair = Stair::create($request->all());
+        
+        // add lines for stair
+        $length = 36;
+        $length_prev = 0;
+        for ($floor = 1; $floor <= $highest_floor_id; $floor++) {
+            StairNode::create([
+                'stair_id' => $new_stair->id,
+                'node_id' => $start_node_id + $length_prev
+            ]); 
+
+            if ($floor >= 2) {
+                Line::create([
+                    'first_node' => $length_prev + $start_node_id - $length,
+                    'second_node' => $length_prev + $start_node_id,
+                    'distance' => 0
+                ]);
+            }
+            
+            if ($floor > 5) {
+                $length -= 6;
+            }
+
+            $length_prev += $length;
+        }
+
+        return redirect()->route('stair.create')->with('success', 'Thêm cầu thang / thang máy thành công!');
     }
 
     public function edit($id){
-        $floor = Floor::find($id);
-        return view('floor.edit');
+        $stair = Stair::find($id);
+        $nodes = Node::all()->sortBy('id')->take(36);
+        $floors = Floor::all()->sortBy('name');
+        return view('stair.edit', compact('stair', 'nodes', 'floors'));
     }
 
     public function update(Request $request, $id){
-        $floor = Floor::find($id);
-        $floor->update($request->all());
+        $start_node_id = $request->input('node_id');
+        $highest_floor_id = $request->input('highest_floor_id');
 
-        return redirect()->route('floor.create')->with('success', 'Sửa Floor thành công!');
+        $stair = Stair::find($id);
+        $stair->update($request->all());
+
+        // remove lines for stair
+        $stair_node_to_remove_line = StairNode::where('stair_id',$id)->orderByRaw('node_id * 1 asc')->get();
+        
+        for ($index = 0; $index < count($stair_node_to_remove_line); $index++) {
+            if ($index > 0) {
+                Line::where('first_node', $stair_node_to_remove_line[$index - 1]->node_id)
+                ->where('second_node', $stair_node_to_remove_line[$index]->node_id)
+                ->delete();
+            }
+        }
+        StairNode::where('stair_id',$id)->delete();
+        
+        // add lines for stair
+        $length = 36;
+        $length_prev = 0;
+        for ($floor = 1; $floor <= $highest_floor_id; $floor++) {
+            StairNode::create([
+                'stair_id' => $id,
+                'node_id' => $start_node_id + $length_prev
+            ]); 
+
+            if ($floor >= 2) {
+                Line::create([
+                    'first_node' => $length_prev + $start_node_id - $length,
+                    'second_node' => $length_prev + $start_node_id,
+                    'distance' => 0
+                ]);
+            }
+            
+            if ($floor > 5) {
+                $length -= 6;
+            }
+
+            $length_prev += $length;
+        }
+
+        return redirect()->route('stair.index')->with('success', 'Sửa cầu thang / thang máy thành công!');
     }
 
     public function delete($id){
-        Floor::find($id)->delete();
-        return redirect()->route('floor.index')->with('success', 'Xóa Floor thành công');
+        Stair::find($id)->delete();
+        return redirect()->route('stair.index')->with('success', 'Xóa cầu thang / thang máy thành công');
     }
 }

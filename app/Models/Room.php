@@ -9,10 +9,11 @@ class Room extends Model
     protected $table = 'rooms';
     public $incrementing = false;
     protected $fillable = [
-        'id', 'name', 'type', 'coordinate_x', 'coordinate_y', 'floor_id'
+        'id', 'name', 'type', 'node_id'
     ];
 
-    public function floor(){
-        return $this->belongsTo(Floor::class, 'floor_id');
+    public function node()
+    {
+        return $this->hasOne(Node::class, 'node_id');
     }
 }

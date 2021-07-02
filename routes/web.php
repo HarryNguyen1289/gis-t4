@@ -41,3 +41,9 @@ Route::prefix('stair')->group(function(){
 
     Route::get('delete/{id}', 'StairController@delete')->name('stair.delete');
 });
+
+Route::prefix('node')->group(function(){
+    Route::get('create', 'NodeController@create')->name('node.create');
+    Route::get('test_bfs', 'NodeController@test_bfs')->name('node.test_bfs');
+    Route::post('get_shortest_path', 'NodeController@get_shortest_path')->name('node.get_shortest_path');
+});

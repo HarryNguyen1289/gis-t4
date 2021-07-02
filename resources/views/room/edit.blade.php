@@ -25,21 +25,17 @@
                     </div>
                     <div class="form-group">
                         <label>Loại phòng</label>
-                        <input type="text" class="form-control" value="{{ $room->type ?? '' }}" name="type"/>
+                        <select class="form-control" name="type" value="{{ $room->type ?? '' }}">
+                            <option value="Phòng học" {{ ($room->type == 'Phòng học') ? 'selected=selected' : '' }}>Phòng học</option>
+                            <option value="Toilet" {{ ($room->type == 'Toilet') ? 'selected=selected' : '' }}>Toilet</option>
+                            <option value="Phòng cơ sở vật chất" {{ ($room->type == 'Phòng cơ sở vật chất') ? 'selected=selected' : '' }}>Phòng cơ sở vật chất</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label>Tọa độ 1</label>
-                        <input type="text" class="form-control" value="{{ $room->coordinate_x ?? '' }}" name="coordinate_x"/>
-                    </div>
-                    <div class="form-group">
-                        <label>Tọa độ 2</label>
-                        <input type="text" class="form-control" value="{{ $room->coordinate_y ?? '' }}" name="coordinate_y"/>
-                    </div>
-                    <div class="form-group">
-                        <label>Tầng</label>
-                        <select class="form-control" name="floor_id" id="cars" value="{{ $room->floor_id ?? '' }}">
-                        @foreach($floors as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
+                        <label>Node</label>
+                        <select class="form-control" name="node_id" id="cars" value="{{ $room->node_id ?? '' }}">
+                        @foreach($nodes as $item)
+                            <option value="{{$item->id}}" {{ ($room->node_id == $item->id) ? 'selected=selected' : '' }}>Node Id: {{$item->id}} || Floor Id: {{$item->floor_id}} || ({{$item->coordinate_x}}, {{$item->coordinate_y}})</option>
                         @endforeach
                         </select>
                     </div>
