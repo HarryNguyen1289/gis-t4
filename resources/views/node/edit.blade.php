@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Tầng
+                <h1 class="page-header">Node
                     <small>Edit</small>
                 </h1>
             </div>
@@ -17,21 +17,24 @@
                         {{session('success')}}
                     </div>
                 @endif
-                <form action="{{ route('floor.update', $floor->id) }}" method="POST">
+                <form action="{{ route('node.update', $node->id) }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label>Tên tầng</label>
-                        <input type="text" class="form-control" value="{{ $floor->name }}" name="name"/>
+                        <label>Tọa độ X</label>
+                        <input type="text" class="form-control" value="{{ $node->coordinate_x }}" name="coordinate_x"/>
                     </div>
                     <div class="form-group">
-                        <label>Độ cao</label>
-                        <input type="text" class="form-control" value="{{ $floor->height }}" name="height"/>
+                        <label>Tọa độ Y</label>
+                        <input type="text" class="form-control" value="{{ $node->coordinate_y }}" name="coordinate_y"/>
                     </div>
                     <div class="form-group">
-                        <label>Danh sách tọa độ</label>
-                        <textarea class="form-control" name="coordinates" id="" cols="30" rows="10">{{ $floor->coordinates }}</textarea>
+                        <label>Tầng</label>
+                        <select class="form-control" name="floor_id" value="{{ $node->floor_id }}">
+                        @foreach($floors as $item)
+                            <option value="{{$item->id}}" {{ ($node->floor_id == $item->id) ? 'selected=selected' : '' }}>{{$item->name}}</option>
+                        @endforeach
+                        </select>
                     </div>
-
                     <button type="submit" class="btn btn-default">Update</button>
                 </form>
             </div>

@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Phòng
+                <h1 class="page-header">Node
                     <small>Create</small>
                 </h1>
             </div>
@@ -17,25 +17,21 @@
                         {{session('success')}}
                     </div>
                 @endif
-                <form action="{{ route('room.store') }}" method="POST">
+                <form action="{{ route('node.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label>Tên phòng</label>
-                        <input type="text" class="form-control" name="name"/>
+                        <label>Tọa độ X</label>
+                        <input type="text" class="form-control" name="coordinate_x"/>
                     </div>
                     <div class="form-group">
-                        <label>Loại phòng</label>
-                        <select class="form-control" name="type">
-                            <option value="Phòng học">Phòng học</option>
-                            <option value="Toilet">Toilet</option>
-                            <option value="Phòng cơ sở vật chất">Phòng cơ sở vật chất</option>
-                        </select>
+                        <label>Tọa độ Y</label>
+                        <input type="text" class="form-control" name="coordinate_y"/>
                     </div>
                     <div class="form-group">
-                        <label>Node</label>
-                        <select class="form-control" name="node_id" id="cars">
-                        @foreach($nodes as $item)
-                            <option value="{{$item->id}}">Node Id: {{$item->id}} || Floor Id: {{$item->floor_id}} || ({{$item->coordinate_x}}, {{$item->coordinate_y}})</option>
+                        <label>Tầng</label>
+                        <select class="form-control" name="floor_id">
+                        @foreach($floors as $item)
+                            <option value="{{$item->id}}">{{$item->name}}</option>
                         @endforeach
                         </select>
                     </div>

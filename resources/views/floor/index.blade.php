@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Floor
+                <h1 class="page-header">Tầng
                     <small>List</small>
                     <a href="{{ route('floor.create') }}" class="btn btn-success" style="float: right">Add new</a>
                 </h1>
@@ -33,7 +33,7 @@
                         <td>{{$item->name}}</td>
                         <td>{{$item->height}}</td>
                         <td class="center"><a href="{{ route('floor.edit', $item->id) }}"><i class="fa fa-pencil fa-fw"></i> </a></td>
-                        <td class="center"> <a href="{{ route('floor.delete', $item->id) }}"><i class="fa fa-trash-o  fa-fw"></i> </a></td>
+                        <td class="center"> <a href="{{ route('floor.delete', $item->id) }}"><i class="fas fa-trash-alt"></i> </a></td>
                     </tr>
                 @endforeach
                 </tbody>

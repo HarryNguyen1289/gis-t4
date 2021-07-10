@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Phòng
+                <h1 class="page-header">Line
                     <small>Create</small>
                 </h1>
             </div>
@@ -17,27 +17,26 @@
                         {{session('success')}}
                     </div>
                 @endif
-                <form action="{{ route('room.store') }}" method="POST">
+                <form action="{{ route('line.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label>Tên phòng</label>
-                        <input type="text" class="form-control" name="name"/>
-                    </div>
-                    <div class="form-group">
-                        <label>Loại phòng</label>
-                        <select class="form-control" name="type">
-                            <option value="Phòng học">Phòng học</option>
-                            <option value="Toilet">Toilet</option>
-                            <option value="Phòng cơ sở vật chất">Phòng cơ sở vật chất</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Node</label>
-                        <select class="form-control" name="node_id" id="cars">
+                        <label>Node thứ nhất</label>
+                        <select class="form-control" name="first_node">
                         @foreach($nodes as $item)
                             <option value="{{$item->id}}">Node Id: {{$item->id}} || Floor Id: {{$item->floor_id}} || ({{$item->coordinate_x}}, {{$item->coordinate_y}})</option>
                         @endforeach
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Node thứ hai</label>
+                        <select class="form-control" name="second_node">
+                        @foreach($nodes as $item)
+                            <option value="{{$item->id}}">Node Id: {{$item->id}} || Floor Id: {{$item->floor_id}} || ({{$item->coordinate_x}}, {{$item->coordinate_y}})</option>
+                        @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group" style="display: none">
+                        <input type="text" class="form-control" name="distance" value="0"/>
                     </div>
                     <button type="submit" class="btn btn-default">Create</button>
                 </form>

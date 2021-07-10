@@ -108,7 +108,20 @@ class StairController extends Controller
     }
 
     public function delete($id){
-        Stair::find($id)->delete();
+        $stair = Stair::find($id);
+
+        // remove lines for stair
+        $stair_node_to_remove_line = StairNode::where('stair_id',$id)->orderByRaw('node_id * 1 asc')->get();
+        
+        for ($index = 0; $index < count($stair_node_to_remove_line); $index++) {
+            if ($index > 0) {
+                Line::where('first_node', $stair_node_to_remove_line[$index - 1]->node_id)
+                ->where('second_node', $stair_node_to_remove_line[$index]->node_id)
+                ->delete();
+            }
+        }
+        StairNode::where('stair_id',$id)->delete();
+        $stair->delete();
         return redirect()->route('stair.index')->with('success', 'Xóa cầu thang / thang máy thành công');
     }
 }

@@ -24,6 +24,7 @@
 
     <!-- DataTables Responsive CSS -->
     <link href="bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
     <script type="text/javascript" language="javascript" src="ckeditor/ckeditor.js" ></script>
 </head>

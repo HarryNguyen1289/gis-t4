@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>GeoJSONLayer | Sample | ArcGIS API for JavaScript 4.16</title>
+    <title>Tìm đường qua các phòng trong tòa nhà B</title>
 
     <style>
         html,
@@ -103,7 +103,7 @@
 
     <link rel="stylesheet" href="https://js.arcgis.com/4.16/esri/themes/light/main.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://js.arcgis.com/4.16/"></script>
@@ -1116,33 +1116,87 @@
 <div id="viewDiv">
     <div class="address-container">
         <div class="form">
-            <form class="p-3" action="" method="GET">
+            <form  class="p-3" action="#" method="POST">
                 @csrf
                 <div class="input-group mb-3">
-                    <input class="form-control" id="phong1" type="text" placeholder="Chọn phòng bắt đầu ... "/>
+                    <select id="room-from" class="form-control" name="start_node_id">
+                        <option value="0" selected>Chọn phòng bắt đầu</option>
+                        @foreach($rooms as $item)
+                            <option value="{{$item->node_id}}">{{$item->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="input-group">
-                    <input class="form-control" id="phong2" type="text" placeholder="Chọn phòng cần đến ... "/>
+                    <select id="room-to" class="form-control" name="end_node_id">
+                        <option value="0" selected>Chọn phòng đích đến</option>
+                        @foreach($rooms as $item)
+                            <option value="{{$item->node_id}}">{{$item->name}}</option>
+                        @endforeach
+                    </select>
                 </div>       
-                <button type="submit" class="btn btn-primary btn-md search"> Tìm Đường </button>
+                <button id="search-btn" type="button" class="btn btn-primary btn-md search"> Tìm Đường </button>
             </form>
         </div>
         <div class="content p-3">
-            <ul class="StepProgress">
-                <li class="StepProgress-item head"><strong>Post a contest</strong></li>
-                <li class="StepProgress-item"><strong>Award an entry</strong></li>
-                <li class="StepProgress-item"><strong>Post a contest</strong></li>
-                <li class="StepProgress-item"><strong>Handover</strong></li>
-                <li class="StepProgress-item"><strong>Provide feedback</strong></li>
-                <li class="StepProgress-item"><strong>Provide feedback</strong></li>
-                <li class="StepProgress-item"><strong>Provide feedback</strong></li>
-
-            </ul>
-            <p class="h4 text-center mt-5">HỆ HỖ TRỢ DẪN ĐƯỜNG ĐI TRONG TÒA NHÀ B - UIT</p>
+            <div style="height: 300px; overflow-y: auto;">
+                <ul class="StepProgress" id="text-list">
+                </ul>
+            </div>
+            <div id="link-view-3d" style="text-align: center; margin: 15px 0; display: none;">
+                <a href="/path" target="_blank">View In 3D</a>
+            </div>
+            <p style="margin-top: 20px;" class="h4 text-center">HỆ HỖ TRỢ DẪN ĐƯỜNG ĐI TRONG TÒA NHÀ B - UIT</p>
         </div>
     </div>
 </div>
+<script>
+    $(function() {
+        $("#search-btn").on('click', function(event) {
+            event.preventDefault();
+            $("#text-list").empty();
+            var roomFrom = $("#room-from").val();
+            var roomTo = $("#room-to").val();
+            console.log("Search", roomFrom, roomTo);
+            $.ajax({
+                type: "POST",
+                url: "/node/get_shortest_path",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    'start_node_id': roomFrom,
+                    'end_node_id': roomTo,
+                },
+                success: function(res) {
+                    var textList = res.text_list;
+                    var lineData = res.lineData;
+                    lineData = lineData.map(function(node) {
+                        return {
+                            pos: {
+                                x: parseFloat(node.pos.x),
+                                y: parseFloat(node.pos.y),
+                                z: node.pos.z
+                            },
+                            type: node.type,
+                            nodeId: node.nodeId,
+                            name: node.name
+                        }
+                    });
+
+                    localStorage.setItem('lineData', JSON.stringify(lineData));
+
+                    textList.forEach(function(text, index) {
+                        if (index == 0) {
+                            $("#text-list").append(`<li class="StepProgress-item head"><strong>${text}</strong></li>`);    
+                        } else {
+                            $("#text-list").append(`<li class="StepProgress-item"><strong>${text}</strong></li>`);
+                        }
+                    });
+                    $("#link-view-3d").show();
+                }
+            });
+        })
+    });
+</script>
 </body>
 
 </html>

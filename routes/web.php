@@ -2,9 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ClientController@index')->name('client.index');
+Route::get('/path', 'ClientController@viewPath')->name('client.path');
 
 Route::prefix('floor')->group(function(){
     Route::get('/', 'FloorController@index')->name('floor.index');
@@ -43,7 +42,29 @@ Route::prefix('stair')->group(function(){
 });
 
 Route::prefix('node')->group(function(){
+    Route::get('/', 'NodeController@index')->name('node.index');
+
     Route::get('create', 'NodeController@create')->name('node.create');
+    Route::post('store', 'NodeController@store')->name('node.store');
+
+    Route::get('edit/{id}', 'NodeController@edit')->name('node.edit');
+    Route::post('{id}', 'NodeController@update')->name('node.update');
+
+    Route::get('delete/{id}', 'NodeController@delete')->name('node.delete');
+
+    Route::get('hardcode_node_list', 'NodeController@hardcode_node_list')->name('node.hardcode_node_list');
     Route::get('test_bfs', 'NodeController@test_bfs')->name('node.test_bfs');
     Route::post('get_shortest_path', 'NodeController@get_shortest_path')->name('node.get_shortest_path');
+});
+
+Route::prefix('line')->group(function(){
+    Route::get('/', 'LineController@index')->name('line.index');
+
+    Route::get('create', 'LineController@create')->name('line.create');
+    Route::post('store', 'LineController@store')->name('line.store');
+
+    Route::get('edit/{id}', 'LineController@edit')->name('line.edit');
+    Route::post('{id}', 'LineController@update')->name('line.update');
+
+    Route::get('delete/{id}', 'LineController@delete')->name('line.delete');
 });

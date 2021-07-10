@@ -6,9 +6,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Cầu thang & Thang máy
+                <h1 class="page-header">Line
                     <small>List</small>
-                    <a href="{{ route('stair.create') }}" class="btn btn-success" style="float: right">Add new</a>
+                    <a href="{{ route('line.create') }}" class="btn btn-success" style="float: right">Add new</a>
                 </h1>
             </div>
             <!-- /.col-lg-12 -->
@@ -20,22 +20,20 @@
                 <thead>
                     <tr align="center">
                         <th>ID</th>
-                        <th>Tên</th>
-                        <th>Loại</th>
-                        <th>Tầng cao nhất</th>
+                        <th>ID Node thứ nhất</th>
+                        <th>ID Node thứ hai</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($stairs as $item)
+                @foreach($lines as $item)
                     <tr class="odd gradeX" align="center">
                         <td>{{$item->id}}</td>
-                        <td>{{$item->name}}</td>
-                        <td>{{$item->type}}</td>
-                        <td>{{$item->highest_floor_id}}</td>
-                        <td class="center"><a href="{{ route('stair.edit', $item->id) }}"><i class="fa fa-pencil fa-fw"></i> </a></td>
-                        <td class="center"> <a href="{{ route('stair.delete', $item->id) }}"><i class="fas fa-trash-alt"></i> </a></td>
+                        <td>{{$item->first_node}}</td>
+                        <td>{{$item->second_node}}</td>
+                        <td class="center"><a href="{{ route('line.edit', $item->id) }}"><i class="fa fa-pencil fa-fw"></i> </a></td>
+                        <td class="center"> <a href="{{ route('line.delete', $item->id) }}"><i class="fas fa-trash-alt"></i> </a></td>
                     </tr>
                 @endforeach
                 </tbody>

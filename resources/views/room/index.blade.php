@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Room
+                <h1 class="page-header">Phòng
                     <small>List</small>
                     <a href="{{ route('room.create') }}" class="btn btn-success" style="float: right">Add new</a>
                 </h1>
@@ -35,7 +35,7 @@
                         <td>{{$item->type}}</td>
                         <td>{{$item->node_id}}</td>
                         <td class="center"><a href="{{ route('room.edit', $item->id) }}"><i class="fa fa-pencil fa-fw"></i> </a></td>
-                        <td class="center"> <a href="{{ route('room.delete', $item->id) }}"><i class="fa fa-trash-o  fa-fw"></i> </a></td>
+                        <td class="center"> <a href="{{ route('room.delete', $item->id) }}"><i class="fas fa-trash-alt"></i> </a></td>
                     </tr>
                 @endforeach
                 </tbody>

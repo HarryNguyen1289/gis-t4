@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Room
+                <h1 class="page-header">Phòng
                     <small>Edit</small>
                 </h1>
             </div>
